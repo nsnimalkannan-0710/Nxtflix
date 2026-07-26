@@ -1,0 +1,118 @@
+.details__backdrop {
+  height: 340px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.details__backdrop-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 13, 18, 0.3), var(--color-bg));
+}
+
+.details__content {
+  position: relative;
+  margin-top: -140px;
+  padding-bottom: 60px;
+}
+
+.details__back {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.details__back:hover {
+  border-color: var(--color-accent);
+}
+
+.details__body {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+}
+
+.details__poster {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.details__title {
+  font-family: var(--font-display);
+  font-size: 44px;
+  letter-spacing: 0.5px;
+  margin: 0 0 14px;
+}
+
+.details__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.details__genre-tag {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.details__rating {
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+.details__overview {
+  color: var(--color-text);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 28px;
+}
+
+.details__watch-later {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.details__watch-later:hover {
+  background: var(--color-accent-hover);
+}
+
+.details__watch-later--active {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+@media (max-width: 700px) {
+  .details__content {
+    margin-top: -80px;
+  }
+  .details__body {
+    grid-template-columns: 1fr;
+  }
+  .details__poster {
+    width: 160px;
+  }
+  .details__title {
+    font-size: 30px;
+  }
+}
