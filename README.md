@@ -32,24 +32,6 @@ npm run build
 
 Output goes to the `build/` folder.
 
-## ⚠️ Important: swap in the real movie data
-
-`src/data/movies.js` currently contains **50 placeholder movies** (same schema:
-id, title, genre, year, rating, duration, poster, backdrop, overview) generated
-locally, because the required catalog JSON is hosted at a URL that isn't reachable
-from this build environment.
-
-Before submitting, replace the contents of `src/data/movies.js` with the real
-50-movie catalog from the assessment's Section 8 link, keeping this structure:
-
-```js
-export const GENRES = ["All", "Action", "Drama", "Comedy", "Thriller", "Sci-Fi", "Romance", "Horror", "Fantasy"];
-
-const movies = [ /* the 50 real movie objects */ ];
-
-export default movies;
-```
-
 ## Project structure
 
 ```
