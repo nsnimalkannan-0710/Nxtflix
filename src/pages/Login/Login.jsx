@@ -6,30 +6,36 @@ import "./index.css";
 
 function Login() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Already authenticated -> skip login
   if (Cookies.get("jwt_token")) {
     return <Navigate to="/" replace />;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+
     setLoading(true);
+    setError("");
 
     try {
       const result = await signIn(email, password);
+
       const token = extractToken(result);
 
       if (!token) {
-        throw new Error("No token returned from server");
+        throw new Error("Invalid Credentials");
       }
 
-      Cookies.set("jwt_token", token, { expires: 7 });
+      Cookies.set("jwt_token", token, {
+        expires: 7,
+      });
+
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -44,8 +50,11 @@ function Login() {
         <h1 className="login__logo">
           NXT<span>FLIX</span>
         </h1>
+
         <p className="login__tagline">
-          Unlimited movies, shows and more. Watch anywhere. Cancel anytime.
+          Unlimited movies, shows and more. Watch
+          <br />
+          anywhere. Cancel anytime.
         </p>
       </div>
 
@@ -54,35 +63,42 @@ function Login() {
           <h2 className="login__title">Sign In</h2>
 
           {error && <div className="login__error">{error}</div>}
-
-          <label className="login__label" htmlFor="email">
+          <br />
+          
+          <label htmlFor="email" className="login__label">
             Email
           </label>
+
           <input
             id="email"
-            type="email"
-            required
             className="login__input"
+            type="email"
+            placeholder="admin@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="admin@example.com"
+            required
           />
 
-          <label className="login__label" htmlFor="password">
+          <label htmlFor="password" className="login__label">
             Password
           </label>
+
           <input
             id="password"
-            type="password"
-            required
             className="login__input"
+            type="password"
+            placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
+            required
           />
 
-          <button className="login__submit" type="submit" disabled={loading}>
-            {loading ? "Signing in…" : "Sign In"}
+          <button
+            type="submit"
+            className="login__submit"
+            disabled={loading}
+          >
+            {loading ? "Signing In..." : "Sign In"}
           </button>
         </form>
       </div>

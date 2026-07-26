@@ -17,7 +17,7 @@ function MovieCard({ movie }) {
       <div className="movie-card__poster-wrap">
         <img src={movie.poster} alt={movie.title} className="movie-card__poster" />
         <span className="movie-card__rating">★ {movie.rating}</span>
-        <div className="movie-card__play-overlay">▶</div>
+        <div className="movie-card__play-overlay" />
       </div>
 
       <h3 className="movie-card__title">{movie.title}</h3>

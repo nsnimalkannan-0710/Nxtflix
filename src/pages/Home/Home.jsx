@@ -29,11 +29,11 @@ function Home() {
       <Header />
 
       <section className="hero">
-        <div className="hero__inner container">
+        <div className="hero__inner">
           <h1 className="hero__title">Discover your next favourite</h1>
           <p className="hero__subtitle">
-            Browse {movies.length} movies across every genre, and save the ones
-            you love to your Watch Later list.
+            Browse {movies.length}+ titles across every genre. Add to Watch
+            Later and pick up anytime.
           </p>
         </div>
       </section>

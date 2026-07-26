@@ -16,7 +16,7 @@ function Header() {
     <header className="app-header">
       <div className="app-header__inner container">
         <Link to="/" className="app-header__logo">
-          NXT<span>FLIX</span>
+          NXTFLIX
         </Link>
 
         <nav className="app-header__nav">

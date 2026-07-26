@@ -11,7 +11,6 @@ function MovieDetails() {
 
   const movie = movies.find((m) => String(m.id) === id);
 
-  // No matching movie -> redirect to not-found
   if (!movie) {
     return <Navigate to="/not-found" replace />;
   }
@@ -30,12 +29,12 @@ function MovieDetails() {
       </div>
 
       <div className="container details__content">
-        <button className="details__back" onClick={() => navigate(-1)}>
-          ← Go Back
-        </button>
-
         <div className="details__body">
-          <img src={movie.poster} alt={movie.title} className="details__poster" />
+          <img
+            src={movie.poster}
+            alt={movie.title}
+            className="details__poster"
+          />
 
           <div className="details__info">
             <h1 className="details__title">{movie.title}</h1>
@@ -49,15 +48,22 @@ function MovieDetails() {
 
             <p className="details__overview">{movie.overview}</p>
 
-            <button
-              className={
-                "details__watch-later" +
-                (saved ? " details__watch-later--active" : "")
-              }
-              onClick={() => toggleWatchLater(movie)}
-            >
-              {saved ? "✓ Added to Watch Later" : "+ Watch Later"}
-            </button>
+            {/* Action Buttons Row */}
+            <div className="details__actions">
+              <button
+                className={
+                  "details__watch-later" +
+                  (saved ? " details__watch-later--active" : "")
+                }
+                onClick={() => toggleWatchLater(movie)}
+              >
+                {saved ? "✓ Added to Watch Later" : "+ Watch Later"}
+              </button>
+
+              <button className="details__back" onClick={() => navigate(-1)}>
+                Go Back
+              </button>
+            </div>
           </div>
         </div>
       </div>
