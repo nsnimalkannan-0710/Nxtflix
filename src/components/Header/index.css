@@ -19,8 +19,7 @@
   font-family: var(--font-display);
   font-size: 28px;
   letter-spacing: 1px;
-  font-weight: bold;
-  color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .app-header__logo span {

@@ -1,6 +1,5 @@
-/* Backdrop Container */
 .details__backdrop {
-  height: 380px;
+  height: 340px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -9,152 +8,111 @@
 .details__backdrop-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(11, 13, 18, 0.2) 0%,
-    rgba(11, 13, 18, 0.8) 70%,
-    #0b0d12 100%
-  );
+  background: linear-gradient(to bottom, rgba(11, 13, 18, 0.3), var(--color-bg));
 }
 
-/* Content Container */
 .details__content {
   position: relative;
-  margin-top: -120px;
+  margin-top: -140px;
   padding-bottom: 60px;
-  z-index: 2;
+}
+
+.details__back {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.details__back:hover {
+  border-color: var(--color-accent);
 }
 
 .details__body {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 260px 1fr;
   gap: 40px;
-  align-items: flex-start;
 }
 
 .details__poster {
   width: 100%;
-  height: 340px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-.details__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 40px;
-}
-
-/* Title Styling */
 .details__title {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-  font-size: 40px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0 0 12px;
-  line-height: 1.1;
+  font-family: var(--font-display);
+  font-size: 44px;
+  letter-spacing: 0.5px;
+  margin: 0 0 14px;
 }
 
-/* Metadata Bar */
 .details__meta {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: #b3b3b3;
+  color: var(--color-text-muted);
   font-size: 14px;
-  font-weight: 500;
   margin-bottom: 20px;
 }
 
-/* RED Genre Badge Fix */
 .details__genre-tag {
-  background: #e50914 !important; /* Red background */
-  color: #ffffff !important;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
   padding: 4px 12px;
-  border-radius: 4px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .details__rating {
-  color: #f5b942;
+  color: var(--color-gold);
   font-weight: 700;
 }
 
-/* Overview Description */
 .details__overview {
-  color: #d1d5db;
-  font-size: 14px;
-  line-height: 1.6;
+  color: var(--color-text);
+  line-height: 1.7;
   max-width: 640px;
   margin-bottom: 28px;
 }
 
-/* Actions Row: Flexbox container placing buttons side by side */
-.details__actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Red Watch Later Button */
 .details__watch-later {
-  background: #e50914;
-  color: #ffffff;
+  background: var(--color-accent);
+  color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
   font-size: 14px;
   font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .details__watch-later:hover {
-  background: #f6121d;
+  background: var(--color-accent-hover);
 }
 
 .details__watch-later--active {
-  background: #2e7d46;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
 }
 
-/* Dark Outlined Go Back Button (Placed Next to Watch Later) */
-.details__back {
-  background: #101010;
-  border: 1px solid #333333;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.details__back:hover {
-  background: #181818;
-  border-color: #555555;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   .details__content {
-    margin-top: -60px;
+    margin-top: -80px;
   }
   .details__body {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
   .details__poster {
-    width: 180px;
-    height: 260px;
-  }
-  .details__info {
-    padding-top: 0;
+    width: 160px;
   }
   .details__title {
-    font-size: 32px;
+    font-size: 30px;
   }
 }

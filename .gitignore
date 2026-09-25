@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 build/
 dist/
 .env
@@ -7,3 +7,7 @@ dist/
 .vscode/
 .DS_Store
 npm-debug.log*
+service-account.json
+nxtflix-backend/.env
+nxtflix-backend/service-account.json
+

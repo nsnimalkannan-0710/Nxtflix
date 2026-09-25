@@ -1,20 +1,15 @@
 .carousel {
-  margin: 30px 0;
+  margin: 40px 0;
 }
 
-/* Title Font and Left Alignment */
 .carousel__title {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  font-size: 20px !important;
-  font-weight: 800 !important;
-  color: #ffffff !important;
-  letter-spacing: -0.2px !important;
-  text-transform: none !important;
-  margin: 0 0 16px !important;
-  padding: 0 0 0 250px !important; /* Aligned with carousel track padding */
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px;
+  padding: 0 32px;
 }
 
-/* Viewport and Track Container */
 .carousel__viewport {
   overflow: hidden;
   width: 100%;
@@ -24,7 +19,7 @@
   display: flex;
   gap: 14px;
   width: max-content;
-  padding: 0 60px; /* Aligned left padding */
+  padding: 0 32px;
 }
 
 .carousel__track--left {
@@ -59,20 +54,14 @@
   }
 }
 
-/* Vertical Poster Card Styling */
 .carousel__item {
   position: relative;
   flex: 0 0 auto;
-  width: 150px;              /* Width for vertical poster */
-  height: 220px;             /* Height for portrait 2:3 ratio */
-  border-radius: 8px;
+  width: 170px;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.carousel__item:hover {
-  transform: scale(1.05);
 }
 
 .carousel__poster {
@@ -81,30 +70,20 @@
   object-fit: cover;
 }
 
-/* Card Overlay Text Styling */
 .carousel__overlay {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 12px 10px 8px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.4) 70%,
-    transparent 100%
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  padding: 10px 8px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
 }
 
 .carousel__item-title {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: #ffffff;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,23 +91,19 @@
 
 .carousel__item-meta {
   margin: 2px 0 0;
-  font-family: 'Inter', system-ui, sans-serif;
   font-size: 11px;
-  color: #b3b3b3;
+  color: var(--color-gold);
 }
 
-/* Mobile Responsive */
 @media (max-width: 640px) {
   .carousel__title {
-    padding-left: 20px !important;
-    font-size: 18px !important;
+    padding: 0 16px;
+    font-size: 20px;
   }
   .carousel__track {
-    padding: 0 20px;
-    gap: 10px;
+    padding: 0 16px;
   }
   .carousel__item {
-    width: 120px;
-    height: 180px;
+    width: 130px;
   }
 }

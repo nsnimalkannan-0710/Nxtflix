@@ -1,142 +1,119 @@
-/* Base Container - 50/50 Split */
 .login {
   min-height: 100vh;
-  width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: #000000;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Left Panel - Dark Red Radial Gradient Background */
 .login__brand {
-  background: radial-gradient(circle at 20% 40%, #5e0000 0%, #1f0000 45%, #000000 80%);
+  background: linear-gradient(160deg, #1a0d10 0%, var(--color-bg) 70%);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 10% 0 12%;
+  padding: 60px;
+  border-right: 1px solid var(--color-border);
 }
 
-/* Brand Logo */
 .login__logo {
-  font-size: 52px;
-  font-weight: 900;
-  color: #e50914;
+  font-family: var(--font-display);
+  font-size: 56px;
+  margin: 0 0 20px;
   letter-spacing: 1px;
-  margin: 0 0 12px 0;
 }
 
-/* Tagline */
+.login__logo span {
+  color: var(--color-accent);
+}
+
 .login__tagline {
-  color: #cccccc;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--color-text-muted);
+  font-size: 18px;
   max-width: 380px;
   line-height: 1.5;
-  margin: 0;
 }
 
-/* Right Panel - Solid Black */
 .login__form-panel {
-  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px;
 }
 
-/* Form Container Box */
 .login__form {
   width: 100%;
   max-width: 360px;
-  background-color: #141414;
-  padding: 40px 36px;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
-/* Form Heading */
-.login-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 24px 0;
-}
-
-/* Error Banner */
-.login__error {
-  background-color: #e87c03;
-  color: #ffffff;
-  padding: 10px 14px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-/* Input Labels */
-.login__label {
-  font-size: 11px;
-  font-weight: 700;
-  color: #8c8c8c;
-  text-transform: uppercase;
+.login__title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  margin: 0 0 24px;
   letter-spacing: 0.5px;
+}
+
+.login__error {
+  background: rgba(230, 57, 80, 0.12);
+  border: 1px solid var(--color-accent);
+  color: #ff8a97;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.login__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
   margin-bottom: 6px;
 }
 
-/* Input Fields */
 .login__input {
-  background-color: #161616;
-  border: 1px solid #333333;
-  color: #ffffff;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
   padding: 12px 14px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   font-size: 14px;
-  margin-bottom: 20px;
-  outline: none;
-  transition: border-color 0.2s ease;
+  margin-bottom: 18px;
 }
 
 .login__input:focus {
-  border-color: #e50914;
+  border-color: var(--color-accent);
 }
 
-/* Submit Button */
 .login__submit {
-  background-color: #e50914;
-  color: #ffffff;
+  background: var(--color-accent);
+  color: #fff;
   border: none;
-  padding: 12px;
-  border-radius: 4px;
+  padding: 13px;
+  border-radius: var(--radius);
   font-size: 15px;
   font-weight: 700;
-  cursor: pointer;
-  margin-top: 6px;
-  transition: background-color 0.2s ease;
+  margin-top: 8px;
+  transition: background 0.15s ease;
 }
 
 .login__submit:hover:not(:disabled) {
-  background-color: #b81d24;
+  background: var(--color-accent-hover);
 }
 
 .login__submit:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Responsive adjustments for mobile screens */
 @media (max-width: 800px) {
   .login {
     grid-template-columns: 1fr;
   }
   .login__brand {
-    padding: 60px 24px 40px;
-    align-items: center;
-    text-align: center;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 40px 24px;
   }
   .login__logo {
-    font-size: 38px;
+    font-size: 40px;
   }
 }

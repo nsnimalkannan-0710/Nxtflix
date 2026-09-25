@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  name         String       @db.VarChar(100)
+  email        String       @unique @db.VarChar(255)
+  passwordHash String       @map("password_hash") @db.VarChar(255)
+  avatarUrl    String?      @default("https://assets.ccbp.in/frontend/react-js/nxt-watch/profile-img.png") @map("avatar_url")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+  watchLater   WatchLater[]
+
+  @@map("users")
+}
+
+model Movie {
+  id                Int          @id @default(autoincrement())
+  title             String       @db.VarChar(255)
+  genre             String       @db.VarChar(50)
+  releaseYear       Int          @map("release_year")
+  rating            Decimal      @db.Decimal(3, 1)
+  duration          String       @db.VarChar(20)
+  posterUrl         String       @map("poster_url")
+  backdropUrl       String       @map("backdrop_url")
+  overview          String       @db.Text
+  googleDriveFileId String       @map("google_drive_file_id") @db.VarChar(255)
+  isTrending        Boolean      @default(false) @map("is_trending")
+  createdAt         DateTime     @default(now()) @map("created_at")
+  watchLater        WatchLater[]
+
+  @@index([genre], map: "idx_movies_genre")
+  @@index([isTrending], map: "idx_movies_trending")
+  @@map("movies")
+}
+
+model WatchLater {
+  id      Int      @id @default(autoincrement())
+  userId  Int      @map("user_id")
+  movieId Int      @map("movie_id")
+  addedAt DateTime @default(now()) @map("added_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@index([userId], map: "idx_watch_later_user")
+  @@map("watch_later")
+}
