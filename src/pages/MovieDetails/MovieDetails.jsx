@@ -16,6 +16,9 @@ function MovieDetails() {
   );
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [usingDemoVideo, setUsingDemoVideo] = useState(false);
+
+  const DEMO_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
   useEffect(() => {
     let isMounted = true;
@@ -37,8 +40,7 @@ function MovieDetails() {
   }
 
   const saved = isInWatchLater(movie.id);
-  const DEMO_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  const [usingDemoVideo, setUsingDemoVideo] = useState(false);
+  const streamUrl = getMovieStreamUrl(movie.id);
 
   const handleVideoError = () => {
     if (!usingDemoVideo) {
