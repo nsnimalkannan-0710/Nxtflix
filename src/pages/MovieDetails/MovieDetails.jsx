@@ -37,7 +37,14 @@ function MovieDetails() {
   }
 
   const saved = isInWatchLater(movie.id);
-  const streamUrl = getMovieStreamUrl(movie.id);
+  const DEMO_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  const [usingDemoVideo, setUsingDemoVideo] = useState(false);
+
+  const handleVideoError = () => {
+    if (!usingDemoVideo) {
+      setUsingDemoVideo(true);
+    }
+  };
 
   return (
     <>
@@ -75,7 +82,7 @@ function MovieDetails() {
                 className="details__play-btn"
                 onClick={() => {
                   setIsPlaying(true);
-                  setVideoError(false);
+                  setUsingDemoVideo(false);
                 }}
               >
                 ▶ Stream Video
@@ -107,15 +114,15 @@ function MovieDetails() {
                   className="details__video"
                   controls
                   autoPlay
-                  src={streamUrl}
+                  src={usingDemoVideo ? DEMO_VIDEO : streamUrl}
                   poster={movie.backdrop}
-                  onError={() => setVideoError(true)}
+                  onError={handleVideoError}
                 >
                   Your browser does not support HTML5 video streaming.
                 </video>
-                {videoError && (
+                {usingDemoVideo && (
                   <div className="details__stream-notice">
-                    Note: Backend video stream endpoint ({streamUrl}) requires Google Cloud Service Account credentials (<code>service-account.json</code>) and a valid Google Drive file ID to stream live video files.
+                    🎬 <strong>Demo Stream Mode Active</strong>: Streaming demo video preview. To stream your actual movie from Google Drive, add your Google Service Account key (<code>service-account.json</code>) to the backend.
                   </div>
                 )}
               </div>

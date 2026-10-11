@@ -110,9 +110,8 @@ export async function streamMovie(req, res, next) {
     }
 
     if (!drive) {
-      return res.status(503).json({
-        message: "Google Drive service is not configured. Please add service-account.json.",
-      });
+      // Demo streaming fallback: redirect to sample test video if Google Drive is not configured yet
+      return res.redirect("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
     }
 
     const fileId = movie.googleDriveFileId;
