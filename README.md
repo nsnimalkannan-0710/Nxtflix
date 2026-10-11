@@ -14,15 +14,22 @@ A movie streaming discovery app built with React 19, React Router 7, and Vite 7.
 ## Getting started
 
 ```bash
+# Frontend
+npm install
+npm run dev
+
+# Backend (Express + PostgreSQL + Google Drive)
+cd nxtflix-backend
 npm install
 npm run dev
 ```
 
-App runs at `http://localhost:3000`.
+Frontend runs at `http://localhost:5173` (or `http://localhost:3000`).
+Backend API runs at `http://localhost:5000`.
 
 Sign in with:
-- Email: `admin@example.com`
-- Password: `admin123`
+- Local Backend default test user: `user@example.com` / `password123`
+- Demo test user: `admin@example.com` / `admin123`
 
 ## Build
 

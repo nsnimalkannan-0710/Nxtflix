@@ -1,20 +1,42 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import {
+  fetchWatchLaterApi,
+  addToWatchLaterApi,
+  removeFromWatchLaterApi,
+} from "../api/movies";
 
 const WatchLaterContext = createContext(null);
 const STORAGE_KEY = "nxtflix_watch_later";
 
 export function WatchLaterProvider({ children }) {
-  // Lazy initializer: runs once on mount, not on every render
   const [watchLater, setWatchLater] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       const parsed = stored ? JSON.parse(stored) : [];
       return Array.isArray(parsed) ? parsed : [];
     } catch {
-      // Invalid JSON in localStorage -> fall back to empty list
       return [];
     }
   });
+
+  // If user has token, sync with backend API on mount
+  useEffect(() => {
+    const token = Cookies.get("jwt_token");
+    if (!token) return;
+
+    let isMounted = true;
+    async function syncBackend() {
+      const serverList = await fetchWatchLaterApi();
+      if (isMounted && serverList && serverList.length > 0) {
+        setWatchLater(serverList);
+      }
+    }
+    syncBackend();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Keep localStorage in sync whenever the list changes
   useEffect(() => {
@@ -23,12 +45,16 @@ export function WatchLaterProvider({ children }) {
 
   const isInWatchLater = (id) => watchLater.some((movie) => movie.id === id);
 
-  const toggleWatchLater = (movie) => {
-    setWatchLater((prev) =>
-      prev.some((m) => m.id === movie.id)
-        ? prev.filter((m) => m.id !== movie.id)
-        : [...prev, movie]
-    );
+  const toggleWatchLater = async (movie) => {
+    const isCurrentlySaved = watchLater.some((m) => m.id === movie.id);
+
+    if (isCurrentlySaved) {
+      setWatchLater((prev) => prev.filter((m) => m.id !== movie.id));
+      await removeFromWatchLaterApi(movie.id);
+    } else {
+      setWatchLater((prev) => [...prev, movie]);
+      await addToWatchLaterApi(movie.id);
+    }
   };
 
   return (

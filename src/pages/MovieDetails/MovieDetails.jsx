@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import movies from "../../data/movies";
+import fallbackMovies from "../../data/movies";
+import { fetchMovieById, getMovieStreamUrl } from "../../api/movies";
 import { useWatchLater } from "../../context/WatchLaterContext";
 import "./index.css";
 
@@ -9,7 +11,25 @@ function MovieDetails() {
   const navigate = useNavigate();
   const { isInWatchLater, toggleWatchLater } = useWatchLater();
 
-  const movie = movies.find((m) => String(m.id) === id);
+  const [movie, setMovie] = useState(() =>
+    fallbackMovies.find((m) => String(m.id) === String(id)) || null
+  );
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadMovie() {
+      const data = await fetchMovieById(id);
+      if (isMounted && data) {
+        setMovie(data);
+      }
+    }
+    loadMovie();
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
 
   // No matching movie -> redirect to not-found
   if (!movie) {
@@ -17,6 +37,7 @@ function MovieDetails() {
   }
 
   const saved = isInWatchLater(movie.id);
+  const streamUrl = getMovieStreamUrl(movie.id);
 
   return (
     <>
@@ -49,15 +70,56 @@ function MovieDetails() {
 
             <p className="details__overview">{movie.overview}</p>
 
-            <button
-              className={
-                "details__watch-later" +
-                (saved ? " details__watch-later--active" : "")
-              }
-              onClick={() => toggleWatchLater(movie)}
-            >
-              {saved ? "✓ Added to Watch Later" : "+ Watch Later"}
-            </button>
+            <div className="details__actions">
+              <button
+                className="details__play-btn"
+                onClick={() => {
+                  setIsPlaying(true);
+                  setVideoError(false);
+                }}
+              >
+                ▶ Stream Video
+              </button>
+
+              <button
+                className={
+                  "details__watch-later" +
+                  (saved ? " details__watch-later--active" : "")
+                }
+                onClick={() => toggleWatchLater(movie)}
+              >
+                {saved ? "✓ Added to Watch Later" : "+ Watch Later"}
+              </button>
+            </div>
+
+            {isPlaying && (
+              <div className="details__player-wrapper">
+                <div className="details__player-header">
+                  <span>Now Streaming: {movie.title}</span>
+                  <button
+                    className="details__close-player"
+                    onClick={() => setIsPlaying(false)}
+                  >
+                    ✕ Close Player
+                  </button>
+                </div>
+                <video
+                  className="details__video"
+                  controls
+                  autoPlay
+                  src={streamUrl}
+                  poster={movie.backdrop}
+                  onError={() => setVideoError(true)}
+                >
+                  Your browser does not support HTML5 video streaming.
+                </video>
+                {videoError && (
+                  <div className="details__stream-notice">
+                    Note: Backend video stream endpoint ({streamUrl}) requires Google Cloud Service Account credentials (<code>service-account.json</code>) and a valid Google Drive file ID to stream live video files.
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
