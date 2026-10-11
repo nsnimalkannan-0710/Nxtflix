@@ -114,7 +114,14 @@ export async function streamMovie(req, res, next) {
       return res.redirect("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
     }
 
-    const fileId = movie.googleDriveFileId;
+    let fileId = movie.googleDriveFileId;
+    if (fileId.includes("/d/")) {
+      const match = fileId.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (match) {
+        fileId = match[1];
+      }
+    }
+
     const range = req.headers.range;
 
     const fileMetaData = await drive.files.get({

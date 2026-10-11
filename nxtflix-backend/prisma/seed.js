@@ -5,15 +5,15 @@ const prisma = new PrismaClient();
 
 const sampleMovies = [
   {
-    title: "Shadow Protocol",
+    title: "Devara",
     genre: "Action",
-    releaseYear: 2005,
-    rating: 6.0,
-    duration: "90 min",
+    releaseYear: 2025,
+    rating: 9.0,
+    duration: "5 min",
     posterUrl: "https://picsum.photos/seed/nxtflix1/400/560",
     backdropUrl: "https://picsum.photos/seed/nxtflixbd1/1280/500",
     overview: "Shadow Protocol is a gripping action story following unforgettable characters through a journey of tension, discovery, and consequence.",
-    googleDriveFileId: "1dQv5X8Lz2M9aBcDeFgHiJkLmNoPqRsTu",
+    googleDriveFileId: "https://drive.google.com/file/d/1Kl0eOQGwXnT8Zq12aMLn6yL78T4d8HRi/view?usp=drive_link",
     isTrending: true
   },
   {

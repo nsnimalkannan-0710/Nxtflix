@@ -10,4 +10,5 @@ npm-debug.log*
 service-account.json
 nxtflix-backend/.env
 nxtflix-backend/service-account.json
-
+nxtflix-backend/*netflixclone*.json
+nxtflix-backend/*service-account*.json
