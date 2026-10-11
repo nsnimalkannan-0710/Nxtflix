@@ -3,14 +3,15 @@ export const GENRES = ["All", "Action", "Drama", "Comedy", "Thriller", "Sci-Fi",
 const movies = [
    {
       "id":1,
-      "title":"Shadow Protocol",
+      "title":"Devara",
       "genre":"Action",
-      "year":2005,
-      "rating":"6.0",
-      "duration":"90 min",
+      "year":2025,
+      "rating":"9.0",
+      "duration":"5 min",
       "poster":"https://picsum.photos/seed/nxtflix1/400/560",
       "backdrop":"https://picsum.photos/seed/nxtflixbd1/1280/500",
-      "overview":"Shadow Protocol is a gripping action story that follows unforgettable characters through a journey of tension, discovery, and consequence. Critically acclaimed for its direction and performances."
+      "overview":"Devara is an epic action spectacle set in coastal lands, chronicling courage, legacy, and fierce destiny.",
+      "googleDriveFileId":"1Kl0eOQGwXnT8Zq12aMLn6yL78T4d8HRi"
    },
    {
       "id":2,
