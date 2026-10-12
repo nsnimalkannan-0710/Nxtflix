@@ -131,16 +131,28 @@ async function main() {
 
   // Seed default test user
   const hashedPassword = await bcrypt.hash("password123", 10);
+  const adminHashedPassword = await bcrypt.hash("admin123", 10);
+
   const testUser = await prisma.user.upsert({
     where: { email: "user@example.com" },
-    update: {},
+    update: { passwordHash: hashedPassword },
     create: {
       name: "John Doe",
       email: "user@example.com",
       passwordHash: hashedPassword,
     },
   });
-  console.log("Created test user:", testUser.email);
+
+  const adminUser = await prisma.user.upsert({
+    where: { email: "admin@example.com" },
+    update: { passwordHash: adminHashedPassword },
+    create: {
+      name: "Admin User",
+      email: "admin@example.com",
+      passwordHash: adminHashedPassword,
+    },
+  });
+  console.log("Created test users:", testUser.email, "and", adminUser.email);
 
   // Seed sample movies
   for (const movieData of sampleMovies) {
