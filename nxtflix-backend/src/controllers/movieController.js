@@ -167,3 +167,127 @@ export async function streamMovie(req, res, next) {
     next(error);
   }
 }
+
+export async function createMovie(req, res, next) {
+  try {
+    const {
+      title,
+      genre,
+      year,
+      releaseYear,
+      rating,
+      duration,
+      poster,
+      posterUrl,
+      backdrop,
+      backdropUrl,
+      overview,
+      googleDriveFileId,
+      isTrending,
+    } = req.body;
+
+    if (!title || !genre) {
+      return res.status(400).json({ message: "Title and genre are required" });
+    }
+
+    const movie = await prisma.movie.create({
+      data: {
+        title,
+        genre,
+        releaseYear: parseInt(year || releaseYear || new Date().getFullYear(), 10),
+        rating: parseFloat(rating || 0.0),
+        duration: duration || "120 min",
+        posterUrl: poster || posterUrl || "https://picsum.photos/seed/nxtflix/400/560",
+        backdropUrl: backdrop || backdropUrl || "https://picsum.photos/seed/nxtflixbd/1280/500",
+        overview: overview || "",
+        googleDriveFileId: googleDriveFileId || "1eFgHiJkLmNoPqRsTuVwXyZ0123456789",
+        isTrending: Boolean(isTrending),
+      },
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Movie created successfully",
+      movie: formatMovie(movie),
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function updateMovie(req, res, next) {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) {
+      return res.status(400).json({ message: "Invalid movie ID" });
+    }
+
+    const {
+      title,
+      genre,
+      year,
+      releaseYear,
+      rating,
+      duration,
+      poster,
+      posterUrl,
+      backdrop,
+      backdropUrl,
+      overview,
+      googleDriveFileId,
+      isTrending,
+    } = req.body;
+
+    const data = {};
+    if (title !== undefined) data.title = title;
+    if (genre !== undefined) data.genre = genre;
+    if (year !== undefined || releaseYear !== undefined) {
+      data.releaseYear = parseInt(year || releaseYear, 10);
+    }
+    if (rating !== undefined) data.rating = parseFloat(rating);
+    if (duration !== undefined) data.duration = duration;
+    if (poster !== undefined || posterUrl !== undefined) {
+      data.posterUrl = poster || posterUrl;
+    }
+    if (backdrop !== undefined || backdropUrl !== undefined) {
+      data.backdropUrl = backdrop || backdropUrl;
+    }
+    if (overview !== undefined) data.overview = overview;
+    if (googleDriveFileId !== undefined) data.googleDriveFileId = googleDriveFileId;
+    if (isTrending !== undefined) data.isTrending = Boolean(isTrending);
+
+    const movie = await prisma.movie.update({
+      where: { id },
+      data,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Movie updated successfully",
+      movie: formatMovie(movie),
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteMovie(req, res, next) {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) {
+      return res.status(400).json({ message: "Invalid movie ID" });
+    }
+
+    await prisma.movie.delete({
+      where: { id },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Movie deleted successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+

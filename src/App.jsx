@@ -1,9 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
 import Home from "./pages/Home/Home";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
 import WatchLater from "./pages/WatchLater/WatchLater";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AccessDenied from "./pages/AccessDenied/AccessDenied";
 import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
@@ -11,9 +14,11 @@ function App() {
     <Routes>
       {/* Public */}
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/forbidden" element={<AccessDenied />} />
       <Route path="/not-found" element={<NotFound />} />
 
-      {/* Protected */}
+      {/* Protected (User & Admin) */}
       <Route
         path="/"
         element={
@@ -35,6 +40,16 @@ function App() {
         element={
           <ProtectedRoute>
             <WatchLater />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Protected (Admin Only) */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute requireAdmin={true}>
+            <AdminDashboard />
           </ProtectedRoute>
         }
       />

@@ -12,15 +12,26 @@ export function authenticateToken(req, res, next) {
 
   try {
     const decoded = verifyToken(token);
-    req.user = { id: decoded.id, email: decoded.email };
+    req.user = { id: decoded.id, email: decoded.email, role: decoded.role || "USER" };
     return next();
   } catch (error) {
     // Graceful fallback: if token was issued by demo API, decode it so database movies are accessible
     const decoded = jwt.decode(token);
     if (decoded && (decoded.id || decoded.email || decoded.username)) {
-      req.user = { id: decoded.id || 1, email: decoded.email || "user@example.com" };
+      req.user = {
+        id: decoded.id || 1,
+        email: decoded.email || "user@example.com",
+        role: decoded.role || "USER",
+      };
       return next();
     }
     return res.status(401).json({ message: "Invalid or expired token" });
   }
+}
+
+export function verifyAdmin(req, res, next) {
+  if (!req.user || req.user.role !== "ADMIN") {
+    return res.status(403).json({ message: "Forbidden: Admin access required" });
+  }
+  return next();
 }

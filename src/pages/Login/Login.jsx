@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { signIn, extractToken } from "../../api/auth";
+import { useAuth } from "../../context/AuthContext";
 import "./index.css";
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,17 +23,10 @@ function Login() {
     setLoading(true);
 
     try {
-      const result = await signIn(email, password);
-      const token = extractToken(result);
-
-      if (!token) {
-        throw new Error("No token returned from server");
-      }
-
-      Cookies.set("jwt_token", token, { expires: 7 });
+      await login(email, password);
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Invalid email or password");
     } finally {
       setLoading(false);
     }
@@ -65,7 +59,7 @@ function Login() {
             className="login__input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="admin@example.com"
+            placeholder="user@example.com"
           />
 
           <label className="login__label" htmlFor="password">
@@ -84,6 +78,13 @@ function Login() {
           <button className="login__submit" type="submit" disabled={loading}>
             {loading ? "Signing in…" : "Sign In"}
           </button>
+
+          <div style={{ marginTop: "20px", textAlign: "center", fontSize: "14px", color: "var(--color-text-muted)" }}>
+            <span>New to NxtFlix?</span>{" "}
+            <Link to="/signup" style={{ color: "#fff", fontWeight: "600", textDecoration: "underline", marginLeft: "4px" }}>
+              Sign up now
+            </Link>
+          </div>
         </form>
       </div>
     </div>

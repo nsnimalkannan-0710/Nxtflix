@@ -48,6 +48,8 @@ export async function fetchMovies(filters = {}) {
   }
 }
 
+export const getMovies = fetchMovies;
+
 export async function fetchTrendingMovies() {
   try {
     const response = await fetch(`${API_BASE}/movies/trending`, {

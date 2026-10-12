@@ -135,30 +135,37 @@ async function main() {
 
   const testUser = await prisma.user.upsert({
     where: { email: "user@example.com" },
-    update: { passwordHash: hashedPassword },
+    update: { passwordHash: hashedPassword, role: "USER" },
     create: {
       name: "John Doe",
       email: "user@example.com",
       passwordHash: hashedPassword,
+      role: "USER",
     },
   });
 
   const adminUser = await prisma.user.upsert({
     where: { email: "admin@example.com" },
-    update: { passwordHash: adminHashedPassword },
+    update: { passwordHash: adminHashedPassword, role: "ADMIN" },
     create: {
       name: "Admin User",
       email: "admin@example.com",
       passwordHash: adminHashedPassword,
+      role: "ADMIN",
     },
   });
-  console.log("Created test users:", testUser.email, "and", adminUser.email);
+  console.log("Created/Updated test users:", testUser.email, `(${testUser.role})`, "and", adminUser.email, `(${adminUser.role})`);
 
   // Seed sample movies
   for (const movieData of sampleMovies) {
-    await prisma.movie.create({
-      data: movieData,
+    const existingMovie = await prisma.movie.findFirst({
+      where: { title: movieData.title },
     });
+    if (!existingMovie) {
+      await prisma.movie.create({
+        data: movieData,
+      });
+    }
   }
 
   console.log("Seeding completed successfully.");

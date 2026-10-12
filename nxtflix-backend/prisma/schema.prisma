@@ -12,6 +12,7 @@ model User {
   name         String       @db.VarChar(100)
   email        String       @unique @db.VarChar(255)
   passwordHash String       @map("password_hash") @db.VarChar(255)
+  role         String       @default("USER") @db.VarChar(20)
   avatarUrl    String?      @default("https://assets.ccbp.in/frontend/react-js/nxt-watch/profile-img.png") @map("avatar_url")
   createdAt    DateTime     @default(now()) @map("created_at")
   updatedAt    DateTime     @updatedAt @map("updated_at")

@@ -1,0 +1,123 @@
+.access-denied {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at center, #1f1115 0%, #0c0c0e 70%);
+  color: #fff;
+  font-family: inherit;
+}
+
+.access-denied__container {
+  max-width: 520px;
+  width: 100%;
+  background: rgba(22, 22, 28, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(229, 9, 20, 0.15);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.access-denied__badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff4d4f;
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+}
+
+.access-denied__icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.access-denied__title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.access-denied__desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #a0a0b0;
+  margin-bottom: 1.75rem;
+}
+
+.access-denied__user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.access-denied__user-info strong {
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.access-denied__role-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #e50914;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.access-denied__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.access-denied__btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.access-denied__btn--primary {
+  background: #e50914;
+  color: #fff;
+}
+
+.access-denied__btn--primary:hover {
+  background: #f40612;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+}
+
+.access-denied__btn--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.access-denied__btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
