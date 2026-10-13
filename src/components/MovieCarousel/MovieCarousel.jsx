@@ -30,6 +30,12 @@ function MovieCarousel({ title, movies, direction = "left" }) {
                 src={movie.poster}
                 alt={movie.title}
                 className="carousel__poster"
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/posters/devara.jpg";
+                }}
               />
               <div className="carousel__overlay">
                 <p className="carousel__item-title">{movie.title}</p>

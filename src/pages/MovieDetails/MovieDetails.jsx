@@ -65,7 +65,16 @@ function MovieDetails() {
         </button>
 
         <div className="details__body">
-          <img src={movie.poster} alt={movie.title} className="details__poster" />
+          <img
+            src={movie.poster}
+            alt={movie.title}
+            className="details__poster"
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/posters/devara.jpg";
+            }}
+          />
 
           <div className="details__info">
             <h1 className="details__title">{movie.title}</h1>

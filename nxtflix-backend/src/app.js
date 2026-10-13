@@ -42,6 +42,7 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/posters", express.static("public/posters"));
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,

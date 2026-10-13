@@ -438,6 +438,11 @@ function AdminDashboard() {
                             src={movie.poster || movie.posterUrl}
                             alt={movie.title}
                             className="admin-table__poster"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = "/posters/devara.jpg";
+                            }}
                           />
                         </td>
                         <td>

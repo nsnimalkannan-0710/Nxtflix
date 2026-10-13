@@ -33,7 +33,9 @@ function Home() {
   }, []);
 
   const freshReleases = useMemo(() => {
-    return allMovies.filter((m) => m.year >= 2015).slice(0, 16);
+    return [...allMovies]
+      .sort((a, b) => Number(b.year) - Number(a.year))
+      .slice(0, 16);
   }, [allMovies]);
 
   const filteredMovies = useMemo(() => {

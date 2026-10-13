@@ -15,7 +15,17 @@ function MovieCard({ movie }) {
       }}
     >
       <div className="movie-card__poster-wrap">
-        <img src={movie.poster} alt={movie.title} className="movie-card__poster" />
+        <img
+          src={movie.poster}
+          alt={movie.title}
+          className="movie-card__poster"
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/posters/devara.jpg";
+          }}
+        />
         <span className="movie-card__rating">★ {movie.rating}</span>
         <div className="movie-card__play-overlay">▶</div>
       </div>
